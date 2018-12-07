@@ -1,0 +1,193 @@
+http://donovanbrown.com/post/visual-studio-code-supports-zen-coding
+
+
+Angular
+------------------
+
+1) Install node.js on windows
+2) install angular cli
+>npm install -g @angular/cli
+3) check the version
+>ng --version
+
+4) create project 
+>ng new hello-world
+>ng serve [To start the project]
+
+install code visual studio
+
+go to the hello-world folder
+
+>code .
+
+install typescript on the machine
+> npm install -g typescript
+> tsc --version
+> code main.ts
+> tsc main.ts (transpile transcript file to the java script file)
+> node main.js (run js on node)
+
+
+
+In Typescript, each file is consider as module. Module can contain class, functions, variables etc and each pf these type can be exported
+and later can be import to use them in other module.
+
+In Angular, module is not like organization of the code, they are thee smaller functional areas.
+
+Angular building blocks
+- Components - Consist of Data, HTML template and Logic
+- Templates
+- Directives
+- Services - HTTP end point to get the data from the server
+Used services as dependency in components and register those dependency in providers of app.module.ts which is callled dependency ingection
+Angular maintain only single instance of the service and pass the same instance to every component which use that service which is called singleton pattern.
+
+
+Real world angular app consist of the tree like component, starting with app component.
+Module in angular is the container for the group of related component.
+
+Steps
+- Create a component
+- Register it in a module = for app module use app.module.ts
+- Add an element in an HTML markup = default use app.component.html
+
+Command line for creating the component
+ng g c course
+
+Command line for creating the service
+ng g s email
+
+String interpolation works well whereever u render the text. like div, paragraph etc.
+Property binding can be used where resources are displayed like image. They work one-way from component to the DOM. Any changes in the component will reflect to the DOM but not vice versa
+
+There are few properties which are the property of the DOM but not the HTML element like "TextContent" for <h> and similarly
+there are properties which are the part of HTML but not the DOM element like "Colsspan" in <td>.
+
+So in PropertyBinding we are binding a properties of a DOM Object and not the HTML element.
+
+>npm install bootstrap --save
+mention bootstrap in the style.css
+
+Class Binding
+- Sometimes we need to add additional class to the base element on some condition for example adding active class to the button.
+
+-2-way binding 
+Need to include FormsModule to use ngModel.
+add this to app.module.ts
+
+
+Pipes
+- pipes are used to format the data. Like Uppercase, lowercase etc.
+for creating custom pipes, create a file in app folder like summary.pipe.ts
+register the pipe in app.module.ts
+
+
+<li>{{hero.name}}</li>
+
+Example of the value binding from component to DOM
+
+<app-hero-detail [hero]="selectedHero"></app-hero-detail>
+Example of the property binding from Component to DOM
+
+<li (click)="selectHero(hero)"></li>
+Example of the event binding from DOM to component
+
+Two-way data binding is an important fourth form that combines property and event binding in a single notation
+<input [(ngModel)]="hero.name">
+In two-way binding, a data property value flows to the input box from the component as with property binding. The user's changes also flow back to the component, resetting the property to the latest value, as with event binding.
+
+Templates
+All external template are bundled with the java script code. There is no seperate request for the template file.
+
+Shadow DOM
+Encapsulation to the outside world of the DOM elements
+It allowed us to apply scoped styles to elements.
+
+use encapsulation attribute to encapsulate the element css from other css.
+
+ng-content = is the angular element for the injecting the content
+
+Directives
+1) Structural Directives
+Modify the structure of the DOM
+2) Attribute Directives
+Modify the attributes of the DOM elements
+
+*ngIf
+Use only when there is large tree of objects. 
+Use the hidden property of the element in case there is small element of tree.
+
+ngIf remove the element from the DOM on the bases of true/false condition.
+whereas hidden property will only hide the element in the DOM.
+
+Leading Asterick in ngIf means that angular will apply <ng-template> to each element with the if condition. It will be as below
+<ng-template [ngIf]="courses.length > 0 ">
+	<div>
+		List of courses.
+	</div>
+</ng-template>
+
+
+using ngClass directive, below code can be replaced 
+<span 
+  class="glyphicon"
+  [class.glyphicon-star]="isSelected"
+  [class.glyphicon-star-empty]="!isSelected"
+  (click)="onClick()"
+  ></span>
+  
+  <span 
+  class="glyphicon"
+  [ngClass]="{
+	'glyphicon-star': isSelected,
+	'glyphicon-star-empty': !isSelected,
+  }"
+  (click)="onClick()"
+  ></span>
+  
+  ngClass is an example of attribte directive. We use this to replace existing attribute in the DOM.
+  
+ 
+
+ Save traversal operator = "?"
+ Use this operator to handle undefined situation.
+ 
+ Custom directive
+ ng g d input-format
+ 
+There are 2 ways to add/remove classes to DOM elements dynamically.
+Using class binding and ngClass directive.
+
+Template driven form
+
+ngForm directives is help in raising an events like submit which can help in validating the form
+ngModelGroup directive is help in applying group level errors in the form but there is no output submit event.
+
+Angular automatically applied FormControl to each input field and we apply ngModel to input field that ngModel is apply to ngForm.
+similarly ngForm and ngModelGroup is apply to FormGroup.
+
+
+Reactive Forms
+
+Select list 
+To save compelte object of the option we need to set ngValue property instead of value.
+ngValue is an attribute directive that exposes the ngValue property. We can bind this with actual object.
+like this 
+[ngValue]="method"
+
+for multiple selection use multiple attribute
+
+Template variables are defined as #
+and use that template variable in validation errors.
+
+Reactive Forms
+
+loader image while async validator is running 
+pending attribute return true is any of the asyc validator is running.
+
+
+HTTP Services
+Fake HTTP Services = jsonplaceholder.typecode.com
+
+
+
